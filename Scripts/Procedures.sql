@@ -1,0 +1,31 @@
+-- EX 1
+-- ALTER PROCEDURE DisplayByYear @Year NVARCHAR(4)
+-- AS
+-- BEGIN
+--     SELECT *
+--     FROM Verbale
+--     WHERE YEAR(DataViolazione) = @Year
+--     ORDER BY DataViolazione
+-- END
+-- GO
+
+
+-- EX 2
+-- CREATE PROCEDURE DisplayPuntiDecurtati @Date NVARCHAR(10)
+-- AS
+-- BEGIN
+--     SELECT DataViolazione, sum(DecurtamentoPunti) as TotalePuntiDecurtati
+--     FROM Verbale
+--     WHERE DataViolazione = @Date
+--     GROUP BY DataViolazione
+-- END
+-- GO
+
+-- EX 3
+-- CREATE PROCEDURE DeleteVerbale @IdVerbale INT
+-- AS
+-- BEGIN
+--     DELETE FROM Verbale
+--     WHERE idVerbale = @IdVerbale
+-- END
+-- GO

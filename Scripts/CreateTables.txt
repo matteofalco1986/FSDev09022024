@@ -1,0 +1,37 @@
+-- TABLE ANAGRAFICA
+
+CREATE TABLE [dbo].[Anagrafica] (
+    [idAnagrafica] INT            IDENTITY (1, 1) NOT NULL,
+    [Cognome]      NVARCHAR (20)  NULL,
+    [Nome]         NVARCHAR (20)  NULL,
+    [Indirizzo]    NVARCHAR (MAX) NULL,
+    [Citta]        NVARCHAR (MAX) NULL,
+    [CAP]          NVARCHAR (5)   NULL,
+    [Cod_Fisc]     NVARCHAR (16)  NULL,
+    CONSTRAINT [PK_Anagrafica] PRIMARY KEY CLUSTERED ([idAnagrafica] ASC)
+);
+
+-- TABLE TIPO VIOLAZIONE
+
+CREATE TABLE [dbo].[TipoViolazione] (
+    [idViolazione] INT            IDENTITY (1, 1) NOT NULL,
+    [Descrizione]  NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_TipoViolazione] PRIMARY KEY CLUSTERED ([idViolazione] ASC)
+);
+
+-- TABLE VERBALE
+
+CREATE TABLE [dbo].[Verbale] (
+    [idVerbale]               INT            IDENTITY (1, 1) NOT NULL,
+    [idViolazione]            INT            NOT NULL,
+    [idPersonaMultata]        INT            NOT NULL,
+    [DataViolazione]          DATE           NULL,
+    [IndirizzoViolazione]     NVARCHAR (255) NULL,
+    [Nominativo_Agente]       NVARCHAR (50)  NULL,
+    [DataTrascrizioneVerbale] DATE           NULL,
+    [Importo]                 MONEY          NULL,
+    [DecurtamentoPunti]       INT            NULL,
+    CONSTRAINT [PK_Verbale] PRIMARY KEY CLUSTERED ([idVerbale] ASC),
+    CONSTRAINT [FK_ID_Persona_Multata] FOREIGN KEY ([idPersonaMultata]) REFERENCES [dbo].[Anagrafica] ([idAnagrafica]),
+    CONSTRAINT [FK_IDViolazione] FOREIGN KEY ([idViolazione]) REFERENCES [dbo].[TipoViolazione] ([idViolazione])
+);
